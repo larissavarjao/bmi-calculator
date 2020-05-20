@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // const são usadas para variaveis imutaveis que são calculadas uma vez só na compilação (não é calculada em runtime).
 // Ou seja, se vc criar um container e o container for jogado fora e criado um novo, o const não serve, tem que ser final, pois ele é calculado em runtime
@@ -25,7 +26,27 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: CardWidget(color: bodyBackgroundColor),
+                  child: CardWidget(
+                      color: bodyBackgroundColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            FontAwesomeIcons.mars,
+                            size: 80.0,
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            'MALE',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Color(0xFF8D8E98),
+                            ),
+                          ),
+                        ],
+                      )),
                 ),
                 Expanded(
                   child: CardWidget(color: bodyBackgroundColor),
