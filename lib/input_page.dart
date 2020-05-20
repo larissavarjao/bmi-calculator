@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'card_widget.dart';
+import 'gender_info.dart';
+
 // const são usadas para variaveis imutaveis que são calculadas uma vez só na compilação (não é calculada em runtime).
 // Ou seja, se vc criar um container e o container for jogado fora e criado um novo, o const não serve, tem que ser final, pois ele é calculado em runtime
 // toda vez que é executado
@@ -27,29 +30,21 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: CardWidget(
-                      color: bodyBackgroundColor,
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            FontAwesomeIcons.mars,
-                            size: 80.0,
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Text(
-                            'MALE',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: Color(0xFF8D8E98),
-                            ),
-                          ),
-                        ],
-                      )),
+                    color: bodyBackgroundColor,
+                    cardChild: GenderInfo(
+                      icon: FontAwesomeIcons.mars,
+                      gender: 'MALE',
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: CardWidget(color: bodyBackgroundColor),
+                  child: CardWidget(
+                    color: bodyBackgroundColor,
+                    cardChild: GenderInfo(
+                      icon: FontAwesomeIcons.venus,
+                      gender: 'FEMALE',
+                    ),
+                  ),
                 )
               ],
             ),
@@ -76,25 +71,6 @@ class _InputPageState extends State<InputPage> {
             height: 80.0,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class CardWidget extends StatelessWidget {
-  final Color color;
-  final Widget cardChild;
-
-  CardWidget({@required this.color, this.cardChild});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: cardChild,
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(10.0),
       ),
     );
   }
