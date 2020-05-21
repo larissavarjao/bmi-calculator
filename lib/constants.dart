@@ -9,6 +9,7 @@ const Color kBottomContainerBackgroundColor = Color(0xFFEB1555);
 const Color kInactiveCardColor = Color(0xFF111328);
 const Color kLightPinkColor = Color(0xFF8D8E98);
 const Color kOverlaySliderColor = Color(0x29EB1555);
+const Color kFABBottomColor = Color(0xFF4C4F5E);
 
 const TextStyle kLabelStyle = TextStyle(
   fontSize: 18.0,
