@@ -5,7 +5,11 @@ import '../components/button_bottom.dart';
 import '../constants.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({Key key}) : super(key: key);
+  final String result;
+  final String interpretation;
+  final String bmiResult;
+
+  ResultsPage({this.result, this.bmiResult, this.interpretation});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +24,8 @@ class ResultsPage extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Container(
+                padding: EdgeInsets.all(15.0),
+                alignment: Alignment.bottomLeft,
                 child: Text(
                   'Your result',
                   style: kTitleStyle,
@@ -33,15 +39,15 @@ class ResultsPage extends StatelessWidget {
                 cardChild: Column(
                   children: <Widget>[
                     Text(
-                      'Normal',
+                      result.toUpperCase(),
                       style: kResultTextStyle,
                     ),
                     Text(
-                      '22.8',
+                      bmiResult,
                       style: kBMITextStyle,
                     ),
                     Text(
-                      'Your BMI it\'s ok! :)',
+                      interpretation,
                       style: kBMITextResult,
                       textAlign: TextAlign.center,
                     )

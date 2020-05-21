@@ -8,6 +8,8 @@ import '../constants.dart';
 import '../components/gender_info.dart';
 import '../components/round_button.dart';
 
+import 'package:bmi_calculator/calculator.dart';
+
 enum Gender { female, male }
 
 class InputPage extends StatefulWidget {
@@ -211,11 +213,18 @@ class _InputPageState extends State<InputPage> {
           ButtonBottom(
             title: 'CALCULATE',
             onTap: () {
+              Calculator calculator =
+                  Calculator(heigth: heigth, weight: weight);
+
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return ResultsPage();
+                    return ResultsPage(
+                      bmiResult: calculator.calculateBMI(),
+                      interpretation: calculator.getIterpretation(),
+                      result: calculator.getResult(),
+                    );
                   },
                 ),
               );
