@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'card_widget.dart';
+import 'constants.dart';
 import 'gender_info.dart';
 
-// const são usadas para variaveis imutaveis que são calculadas uma vez só na compilação (não é calculada em runtime).
-// Ou seja, se vc criar um container e o container for jogado fora e criado um novo, o const não serve, tem que ser final, pois ele é calculado em runtime
-// toda vez que é executado
-const double bottomContainerHeigth = 80.0;
-const Color bodyBackgroundColor = Color(0xFF1D133);
-const Color bottomContainerBackgroundColor = Color(0xFFEB1555);
-const Color inactiveCardColor = Color(0xFF111328);
 enum Gender { female, male }
 
 class InputPage extends StatefulWidget {
@@ -20,6 +14,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
+  int heigth = 180;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +23,7 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: Row(
@@ -35,8 +31,8 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: CardWidget(
                     color: selectedGender == Gender.male
-                        ? bodyBackgroundColor
-                        : inactiveCardColor,
+                        ? kBodyBackgroundColor
+                        : kInactiveCardColor,
                     cardChild: GenderInfo(
                       icon: FontAwesomeIcons.mars,
                       gender: 'MALE',
@@ -51,8 +47,8 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: CardWidget(
                     color: selectedGender == Gender.female
-                        ? bodyBackgroundColor
-                        : inactiveCardColor,
+                        ? kBodyBackgroundColor
+                        : kInactiveCardColor,
                     cardChild: GenderInfo(
                       icon: FontAwesomeIcons.venus,
                       gender: 'FEMALE',
@@ -68,25 +64,72 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
-            child: CardWidget(color: bodyBackgroundColor),
+            child: CardWidget(
+              color: kBodyBackgroundColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('HEIGHT'),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        heigth.toString(),
+                        style: kNumberStyle,
+                      ),
+                      Text(
+                        'cm',
+                        style: kLabelStyle,
+                      )
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: Colors.white,
+                      thumbColor: kBottomContainerBackgroundColor,
+                      overlayColor: kOverlaySliderColor,
+                      thumbShape: RoundSliderThumbShape(
+                        enabledThumbRadius: 15.0,
+                      ),
+                      overlayShape: RoundSliderOverlayShape(
+                        overlayRadius: 30.0,
+                      ),
+                      inactiveTrackColor: kLightPinkColor,
+                    ),
+                    child: Slider(
+                      value: heigth.toDouble(),
+                      min: 120.0,
+                      max: 220.0,
+                      onChanged: (value) {
+                        setState(() {
+                          heigth = value.toInt();
+                        });
+                      },
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: CardWidget(color: bodyBackgroundColor),
+                  child: CardWidget(color: kBodyBackgroundColor),
                 ),
                 Expanded(
-                  child: CardWidget(color: bodyBackgroundColor),
+                  child: CardWidget(color: kBodyBackgroundColor),
                 )
               ],
             ),
           ),
           Container(
-            color: bottomContainerBackgroundColor,
+            color: kBottomContainerBackgroundColor,
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
-            height: 80.0,
+            height: kBottomContainerHeigth,
           ),
         ],
       ),
