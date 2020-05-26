@@ -17,7 +17,7 @@ You can see when you click the app, that will calculate your BMI (IMC em portugu
 
 View of the app
 
-![view of app](images/app-view.png)
+![view of app](assets/app-video.gif)
 
 ## Technologies
 
